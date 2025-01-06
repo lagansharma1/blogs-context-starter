@@ -4,6 +4,7 @@ import Pagination from "./components/Pagination"
 import { useContext, useEffect } from "react";
 import { AppContext } from "./components/context/AppContext";
 import "./App.css"
+import { Route, Router } from "react-router-dom";
 
 export default function App() {
   const {fetchBlogPosts} =useContext(AppContext)
@@ -11,11 +12,11 @@ export default function App() {
     fetchBlogPosts();
   },[]);
   return (
-    <div >
-      <Header className="w-full h-full flex flex-col gap-y-1 justify-center items-center"/>
-      <Blogs/>
-      <Pagination/>
-
-    </div>
-  );
+    <Routes>
+      <Route Path="/" element={<Home/>}/>
+      <Route Path="/blog/:blogId" element={<BlogPage/>}/>
+      <Route Path="/tag/:tag" element={<TagPage/>}/>
+      <Route Path="/category/:category" element={<CategoryPage/>}/>
+   </Routes>
+  )
 }
